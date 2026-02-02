@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Form</title>
+</head>
+<body>
+<form>
+  <h3>Basic Info</h3>
+  <hr>
+  <table cellpadding="6">
+    <tr>
+      <td>Employee ID</td>
+      <td><input type="text" name="empId" value="9"></td>
+    </tr>
+    <tr>
+      <td>Last Name</td>
+      <td><input type="text" name="lastName" value="Dodsworth"></td>
+    </tr>
+    <tr>
+      <td>First Name</td>
+      <td><input type="text" name="firstName" value="Anne"></td>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td>
+        <input type="radio" name="gender" value="male"> Male<br>
+        <input type="radio" name="gender" value="female"> Female<br>
+        <input type="radio" name="gender" value="xxx"> XXX<br>
+        <input type="radio" name="gender" value="zzz" checked> ZZZ
+      </td>
+    </tr>
+    <tr>
+      <td>Title</td>
+      <td><input type="text" name="title" value="Sales Representative"></td>
+    </tr>
+    <tr>
+      <td>Suffix</td>
+      <td><input type="text" name="suffix" value="Ms."></td>
+    </tr>
+    <tr>
+      <td>BirthDate</td>
+      <td><input type="text" name="birthDate" value="1969-07-02 00:00:00">(?)</td>
+    </tr>
+    <tr>
+      <td>HireDate</td>
+      <td><input type="text" name="hireDate" value="1994-11-15 00:00:00"></td>
+    </tr>
+    <tr>
+      <td>SSN # (if applicable)</td>
+      <td><input type="text" name="ssn"></td>
+    </tr>
+    <tr>
+      <td>Reports To</td>
+      <td>
+        <select name="reportsTo">
+          <option selected>Buchanan</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <h3>Contact Info</h3>
+  <hr>
+  <table cellpadding="6">
+    <tr>
+      <td>Email</td>
+      <td><input type="email" name="email" placeholder="name@example.com"></td>
+    </tr>
+    <tr>
+      <td>Address</td>
+      <td><input type="text" name="address" value="7 Houndstooth Rd."></td>
+    </tr>
+    <tr>
+      <td>City</td>
+      <td><input type="text" name="city" value="London"></td>
+    </tr>
+    <tr>
+      <td>Region</td>
+      <td><input type="text" name="region"></td>
+    </tr>
+    <tr>
+      <td>Postal Code</td>
+      <td><input type="text" name="postal" value="WG2 7LT"></td>
+    </tr>
+    <tr>
+      <td>Country</td>
+      <td>
+        <select name="country">
+          <option selected>Russian Federation</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>US Home Phone</td>
+      <td><input type="text" name="homePhone" value="(234)234-2342"></td>
+    </tr>
+    <tr>
+      <td>Photo</td>
+      <td><input type="text" name="photo" value="EmpID9.bmp"></td>
+    </tr>
+  </table>
+  <br>
+  <h3>Optional Info</h3>
+  <hr>
+  <table cellpadding="6">
+    <tr>
+      <td valign="top">Notes</td>
+      <td>
+        <textarea name="notes" rows="8" cols="60">
+Anne has a BA degree in English from St. Lawrence College.
+She is fluent in French and German.ZZZ
+        </textarea>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top">Preferred Shift</td>
+      <td>
+        <input type="checkbox" name="shiftRegular" value="regular"> Regular<br>
+        <input type="checkbox" name="shiftGrave" value="graveyard" checked> Gravy Yard
+      </td>
+    </tr>
+    <tr>
+      <td>Active?</td>
+      <td>
+        <input type="checkbox" name="active" checked>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top">Are you human?</td>
+      <td>
+        <div>TIDAWO &nbsp;&nbsp;&nbsp; Click to change</div>
+        <input type="text" name="captcha" size="50">
+      </td>
+    </tr>
+  </table>
+  <br>
+  <hr>
+  <table width="100%">
+    <tr>
+      <td>
+        <button type="button">&lt;</button>
+        <button type="button">&gt;</button>
+      </td>
+      <td align="right">
+        <button type="submit">Submit</button>
+        <button type="reset">Cancel</button>
+      </td>
+    </tr>
+  </table>
+  <p>* required</p>
+</form>
+</body>
+</html>

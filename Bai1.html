@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bài tập Flexbox Form</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body{
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #ffffff;
+      padding: 30px;
+      color: #333;
+    }
+
+    .form-wrap{
+      max-width: 900px;
+      margin: 0 auto;
+      border: 2px solid #333;
+      padding: 28px;
+      background: #fff;
+    }
+
+    .form-title{
+      margin: 0 0 18px;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    /* FLEX: chia layout các dòng */
+    form{
+      display: flex;
+      flex-wrap: wrap;     /* cho phép xuống dòng */
+      gap: 18px 28px;      /* gap dọc và ngang */
+    }
+
+    /* Mặc định mỗi field full width */
+    .field{
+      width: 100%;
+    }
+
+    /* 2 ô đầu chia đôi */
+    .half{
+      width: calc(50% - 14px); /* trừ nửa khoảng gap ngang (28px/2) */
+      min-width: 260px;        /* nhỏ quá thì tự rớt xuống dòng */
+    }
+
+    input, textarea{
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #cfcfcf;
+      border-radius: 2px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    input::placeholder, textarea::placeholder{
+      color: #9a9a9a;
+    }
+
+    textarea{
+      min-height: 260px;
+      resize: vertical;
+    }
+
+    /* Hàng cuối: nút trái - note phải */
+    .actions{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 6px;
+      gap: 16px;
+    }
+
+    button{
+      background: #66b8ff;
+      border: 1px solid #4aa7f6;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover{ filter: brightness(0.95); }
+
+    .note{
+      color: #666;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    /* Responsive: màn hình nhỏ -> 2 ô đầu full width */
+    @media (max-width: 650px){
+      .half{ width: 100%; }
+      .note{ white-space: normal; text-align: right; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-wrap">
+    <h2 class="form-title">Get in touch with us by filling contact form below</h2>
+
+    <form>
+      <div class="field half">
+        <input type="text" placeholder="* Enter your full name" required>
+      </div>
+
+      <div class="field half">
+        <input type="email" placeholder="* Enter your email address" required>
+      </div>
+
+      <div class="field">
+        <input type="text" placeholder="Enter your subject">
+      </div>
+
+      <div class="field">
+        <textarea placeholder="* Your message here..." required></textarea>
+      </div>
+
+      <div class="actions">
+        <button type="submit">Send message</button>
+        <div class="note">* Please fill all required form field, thanks!</div>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

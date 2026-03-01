@@ -63,7 +63,8 @@ footer {
     border-radius: 8px;
     vertical-align: top;
 } */
- /* ===== BÀI 3A  ===== */
+
+ /* ===== BÀI 3A  =====*/
 
 
 .posts {
@@ -131,6 +132,39 @@ footer {
   }
 }
 
+/*Bai4*/
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: #007bff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 24px;
+    transition: all 0.3s ease;
+}
+.scroll-top:hover {
+    background: #0056b3;
+    transform: scale(1.1);
+}
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+} 
 
 
 .btn {

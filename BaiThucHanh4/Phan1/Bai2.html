@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bộ lọc và tìm kiếm danh sách sinh viên</title>
+  <link rel="stylesheet" href="Bai2.css">
+</head>
+<body>
+  <h1>Quản Lý Điểm Sinh Viên</h1>
+  <div class="form-row">
+    <input type="text" id="hoTen" placeholder="Nhập họ tên">
+    <input type="number" id="diem" placeholder="Nhập điểm (0 - 10)" min="0" max="10" step="0.1">
+    <button id="btnThem">Thêm</button>
+  </div>
+  <div class="filter-row">
+    <input type="text" id="searchInput" placeholder="Tìm kiếm theo họ tên...">
+    <select id="filterLoai">
+      <option value="Tất cả">Tất cả</option>
+      <option value="Giỏi">Giỏi</option>
+      <option value="Khá">Khá</option>
+      <option value="Trung bình">Trung bình</option>
+      <option value="Yếu">Yếu</option>
+    </select>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Họ tên</th>
+        <th class="sortable" id="sortDiem">Điểm</th>
+        <th>Xếp loại</th>
+        <th>Thao tác</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  <div class="stats" id="thongKe">
+    Tổng số sinh viên: 0 | Điểm trung bình: 0.00
+  </div>
+  <script src="Bai2.js"></script>
+</body>
+</html>

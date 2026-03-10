@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bảng Điểm Sinh Viên</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #f7f7f7;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .form-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+    }
+    input {
+      flex: 1;
+      min-width: 200px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background: #e9ecef;
+    }
+    .low-score {
+      background-color: yellow;
+    }
+    .delete-btn {
+      background: #dc3545;
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+    .delete-btn:hover {
+      background: #a71d2a;
+    }
+    .stats {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quản Lý Điểm Sinh Viên</h1>
+  <div class="form-group">
+    <input type="text" id="hoTen" placeholder="Nhập họ tên sinh viên" />
+    <input type="number" id="diem" placeholder="Nhập điểm (0 - 10)" step="0.1" min="0" max="10" />
+    <button id="btnThem">Thêm</button>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Họ tên</th>
+        <th>Điểm</th>
+        <th>Xếp loại</th>
+        <th>Thao tác</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+    </tbody>
+  </table>
+  <div class="stats" id="thongKe">
+    Tổng số sinh viên: 0 | Điểm trung bình: 0.00
+  </div>
+  <script>
+    const hoTenInput = document.getElementById("hoTen");
+    const diemInput = document.getElementById("diem");
+    const btnThem = document.getElementById("btnThem");
+    const tableBody = document.getElementById("tableBody");
+    const thongKe = document.getElementById("thongKe");
+    let danhSachSinhVien = [];
+    function xepLoai(diem) {
+      if (diem >= 8.5) return "Giỏi";
+      if (diem >= 7.0) return "Khá";
+      if (diem >= 5.0) return "Trung bình";
+      return "Yếu";
+    }
+    function renderTable() {
+      tableBody.innerHTML = "";
+      danhSachSinhVien.forEach((sv, index) => {
+        const tr = document.createElement("tr");
+        if (sv.diem < 5) {
+          tr.classList.add("low-score");
+        }
+        tr.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${sv.hoTen}</td>
+          <td>${sv.diem.toFixed(1)}</td>
+          <td>${xepLoai(sv.diem)}</td>
+          <td>
+            <button class="delete-btn" data-index="${index}">Xóa</button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+      capNhatThongKe();
+    }
+    function capNhatThongKe() {
+      const tongSo = danhSachSinhVien.length;
+      let diemTB = 0;
+      if (tongSo > 0) {
+        const tongDiem = danhSachSinhVien.reduce((sum, sv) => sum + sv.diem, 0);
+        diemTB = tongDiem / tongSo;
+      }
+      thongKe.textContent = `Tổng số sinh viên: ${tongSo} | Điểm trung bình: ${diemTB.toFixed(2)}`;
+    }
+    function themSinhVien() {
+      const hoTen = hoTenInput.value.trim();
+      const diem = parseFloat(diemInput.value);
+      if (hoTen === "") {
+        alert("Họ tên không được để trống!");
+        hoTenInput.focus();
+        return;
+      }
+      if (isNaN(diem) || diem < 0 || diem > 10) {
+        alert("Điểm phải là số từ 0 đến 10!");
+        diemInput.focus();
+        return;
+      }
+      const sinhVien = {
+        hoTen: hoTen,
+        diem: diem
+      };
+      danhSachSinhVien.push(sinhVien);
+      renderTable();
+      hoTenInput.value = "";
+      diemInput.value = "";
+      hoTenInput.focus();
+    }
+    btnThem.addEventListener("click", themSinhVien);
+    diemInput.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        themSinhVien();
+      }
+    });
+    tableBody.addEventListener("click", function(event) {
+      if (event.target.classList.contains("delete-btn")) {
+        const index = event.target.getAttribute("data-index");
+        danhSachSinhVien.splice(index, 1);
+        renderTable();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form đặt hàng</title>
+  <link rel="stylesheet" href="Bai2.2.css">
+</head>
+<body>
+  <div class="container">
+    <form id="orderForm">
+      <h2>Đặt hàng trực tuyến</h2>
+      <div class="form-group">
+        <label for="product">Tên sản phẩm</label>
+        <select id="product">
+          <option value="">-- Chọn sản phẩm --</option>
+          <option value="Áo">Áo</option>
+          <option value="Quần">Quần</option>
+        </select>
+        <span class="error" id="product-error"></span>
+      </div>
+      <div class="form-group">
+        <label for="quantity">Số lượng</label>
+        <input type="number" id="quantity" min="1" max="99">
+        <span class="error" id="quantity-error"></span>
+      </div>
+      <div class="form-group">
+        <label for="deliveryDate">Ngày giao hàng</label>
+        <input type="date" id="deliveryDate">
+        <span class="error" id="deliveryDate-error"></span>
+      </div>
+      <div class="form-group">
+        <label for="address">Địa chỉ giao</label>
+        <input type="text" id="address">
+        <span class="error" id="address-error"></span>
+      </div>
+      <div class="form-group">
+        <label for="note">Ghi chú</label>
+        <textarea id="note" rows="4"></textarea>
+        <div class="note-row">
+          <span class="error" id="note-error"></span>
+          <span id="note-count">0/200</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Phương thức thanh toán</label>
+        <div class="radio-group">
+          <label><input type="radio" name="payment" value="COD"> COD</label>
+          <label><input type="radio" name="payment" value="Chuyển khoản"> Chuyển khoản</label>
+          <label><input type="radio" name="payment" value="Ví điện tử"> Ví điện tử</label>
+        </div>
+        <span class="error" id="payment-error"></span>
+      </div>
+      <div class="total-box">
+        Tổng tiền: <strong id="totalPrice">0 VNĐ</strong>
+      </div>
+      <button type="submit">Đặt hàng</button>
+    </form>
+    <div id="confirmBox" class="confirm-box">
+      <h3>Xác nhận đơn hàng</h3>
+      <div id="orderSummary"></div>
+      <p>Bạn có chắc muốn đặt hàng?</p>
+      <div class="confirm-actions">
+        <button type="button" id="confirmBtn">Xác nhận</button>
+        <button type="button" id="cancelBtn" class="cancel">Hủy</button>
+      </div>
+    </div>
+    <div id="successMessage" class="success-message"></div>
+  </div>
+  <script src="Bai2.2.js"></script>
+</body>
+</html>

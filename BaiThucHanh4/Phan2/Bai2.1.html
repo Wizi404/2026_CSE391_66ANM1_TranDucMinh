@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form đăng ký tài khoản</title>
+  <style>
+    body{font-family:Arial,sans-serif;background:#f4f4f4;padding:30px}
+    .container{max-width:520px;margin:auto;background:#fff;padding:24px;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,.08)}
+    h2{text-align:center;margin-bottom:20px}
+    .form-group{margin-bottom:14px}
+    label{display:block;margin-bottom:6px;font-weight:600}
+    input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;box-sizing:border-box}
+    .radio-group,.checkbox-group{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+    .radio-group label,.checkbox-group label{margin:0;font-weight:normal}
+    .error{display:block;color:red;font-size:14px;min-height:18px;margin-top:4px}
+    .invalid{border:1px solid red}
+    .valid{border:1px solid green}
+    button{width:100%;padding:12px;background:#007bff;color:#fff;border:none;border-radius:6px;font-size:16px;cursor:pointer}
+    button:hover{background:#0056b3}
+    .success{display:none;text-align:center;padding:30px 20px;font-size:20px;color:green;font-weight:bold}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form id="registerForm">
+      <h2>Đăng ký tài khoản</h2>
+      <div class="form-group">
+        <label for="fullname">Họ và tên</label>
+        <input type="text" id="fullname">
+        <span class="error" id="fullname-error"></span>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email">
+        <span class="error" id="email-error"></span>
+      </div>
+      <div class="form-group">
+        <label for="phone">Số điện thoại</label>
+        <input type="text" id="phone">
+        <span class="error" id="phone-error"></span>
+      </div>
+      <div class="form-group">
+        <label for="password">Mật khẩu</label>
+        <input type="password" id="password">
+        <span class="error" id="password-error"></span>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Xác nhận mật khẩu</label>
+        <input type="password" id="confirmPassword">
+        <span class="error" id="confirmPassword-error"></span>
+      </div>
+      <div class="form-group">
+        <label>Giới tính</label>
+        <div class="radio-group">
+          <label><input type="radio" name="gender" value="Nam"> Nam</label>
+          <label><input type="radio" name="gender" value="Nữ"> Nữ</label>
+          <label><input type="radio" name="gender" value="Khác"> Khác</label>
+        </div>
+        <span class="error" id="gender-error"></span>
+      </div>
+      <div class="form-group">
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="terms"> Tôi đồng ý với điều khoản</label>
+        </div>
+        <span class="error" id="terms-error"></span>
+      </div>
+      <button type="submit">Đăng ký</button>
+    </form>
+    <div class="success" id="successMessage"></div>
+  </div>
+  <script>
+    const form=document.getElementById("registerForm")
+    const successMessage=document.getElementById("successMessage")
+    const fullname=document.getElementById("fullname")
+    const email=document.getElementById("email")
+    const phone=document.getElementById("phone")
+    const password=document.getElementById("password")
+    const confirmPassword=document.getElementById("confirmPassword")
+    const terms=document.getElementById("terms")
+    const emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const phoneRegex=/^0[0-9]{9}$/
+    const passwordRegex=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/
+    const fullnameRegex=/^[a-zA-ZÀ-ỹ\s]+$/
+    function showError(fieldId,message){
+      const field=document.getElementById(fieldId)
+      const error=document.getElementById(fieldId+"-error")
+      error.textContent=message
+      field.classList.remove("valid")
+      field.classList.add("invalid")
+    }
+    function clearError(fieldId){
+      const field=document.getElementById(fieldId)
+      const error=document.getElementById(fieldId+"-error")
+      error.textContent=""
+      field.classList.remove("invalid")
+      field.classList.add("valid")
+    }
+    function showGroupError(errorId,message){
+      document.getElementById(errorId).textContent=message
+    }
+    function clearGroupError(errorId){
+      document.getElementById(errorId).textContent=""
+    }
+    function validateFullname(){
+      const value=fullname.value.trim()
+      if(value===""){
+        showError("fullname","Họ và tên không được để trống")
+        return false
+      }
+      if(value.length<3){
+        showError("fullname","Họ và tên phải có ít nhất 3 ký tự")
+        return false
+      }
+      if(!fullnameRegex.test(value)){
+        showError("fullname","Họ và tên chỉ được chứa chữ cái và khoảng trắng")
+        return false
+      }
+      clearError("fullname")
+      return true
+    }
+    function validateEmail(){
+      const value=email.value.trim()
+      if(value===""){
+        showError("email","Email không được để trống")
+        return false
+      }
+      if(!emailRegex.test(value)){
+        showError("email","Email không đúng định dạng")
+        return false
+      }
+      clearError("email")
+      return true
+    }
+    function validatePhone(){
+      const value=phone.value.trim()
+      if(value===""){
+        showError("phone","Số điện thoại không được để trống")
+        return false
+      }
+      if(!phoneRegex.test(value)){
+        showError("phone","Số điện thoại phải có 10 chữ số và bắt đầu bằng 0")
+        return false
+      }
+      clearError("phone")
+      return true
+    }
+    function validatePassword(){
+      const value=password.value
+      if(value===""){
+        showError("password","Mật khẩu không được để trống")
+        return false
+      }
+      if(!passwordRegex.test(value)){
+        showError("password","Mật khẩu phải có ít nhất 8 ký tự, gồm chữ hoa, chữ thường và số")
+        return false
+      }
+      clearError("password")
+      return true
+    }
+    function validateConfirmPassword(){
+      const value=confirmPassword.value
+      if(value===""){
+        showError("confirmPassword","Vui lòng xác nhận mật khẩu")
+        return false
+      }
+      if(value!==password.value){
+        showError("confirmPassword","Mật khẩu xác nhận không khớp")
+        return false
+      }
+      clearError("confirmPassword")
+      return true
+    }
+    function validateGender(){
+      const gender=document.querySelector('input[name="gender"]:checked')
+      if(!gender){
+        showGroupError("gender-error","Vui lòng chọn giới tính")
+        return false
+      }
+      clearGroupError("gender-error")
+      return true
+    }
+    function validateTerms(){
+      if(!terms.checked){
+        showGroupError("terms-error","Bạn phải đồng ý với điều khoản")
+        return false
+      }
+      clearGroupError("terms-error")
+      return true
+    }
+    fullname.addEventListener("blur",validateFullname)
+    email.addEventListener("blur",validateEmail)
+    phone.addEventListener("blur",validatePhone)
+    password.addEventListener("blur",validatePassword)
+    confirmPassword.addEventListener("blur",validateConfirmPassword)
+    fullname.addEventListener("input",()=>{document.getElementById("fullname-error").textContent="";fullname.classList.remove("invalid","valid")})
+    email.addEventListener("input",()=>{document.getElementById("email-error").textContent="";email.classList.remove("invalid","valid")})
+    phone.addEventListener("input",()=>{document.getElementById("phone-error").textContent="";phone.classList.remove("invalid","valid")})
+    password.addEventListener("input",()=>{document.getElementById("password-error").textContent="";password.classList.remove("invalid","valid")})
+    confirmPassword.addEventListener("input",()=>{document.getElementById("confirmPassword-error").textContent="";confirmPassword.classList.remove("invalid","valid")})
+
+    document.querySelectorAll('input[name="gender"]').forEach(item=>{
+      item.addEventListener("change",()=>clearGroupError("gender-error"))
+    })
+    terms.addEventListener("change",()=>clearGroupError("terms-error"))
+    form.addEventListener("submit",function(event){
+      event.preventDefault()
+      const isValid=
+        validateFullname() &
+        validateEmail() &
+        validatePhone() &
+        validatePassword() &
+        validateConfirmPassword() &
+        validateGender() &
+        validateTerms()
+      if(isValid){
+        form.style.display="none"
+        successMessage.style.display="block"
+        successMessage.textContent=`Đăng ký thành công! 🎉 Chào mừng ${fullname.value.trim()}`
+      }
+    })
+  </script>
+</body>
+</html>

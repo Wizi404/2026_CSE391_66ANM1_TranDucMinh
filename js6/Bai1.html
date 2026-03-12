@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thực hành Selecting Elements</title>
+</head>
+<body>
+  <h1 id="title">Bài thực hành Selecting Elements</h1>
+
+  <p class="item">Phần tử thứ 1</p>
+  <p class="item">Phần tử thứ 2</p>
+  <p class="item">Phần tử thứ 3</p>
+
+  <div id="box" class="content">Đây là phần tử có id và class</div>
+
+  <script>
+    const motPhanTu = document.querySelector(".item")
+    console.log("querySelector:", motPhanTu)
+
+    const danhSachPhanTu = document.querySelectorAll(".item")
+    console.log("querySelectorAll:", danhSachPhanTu)
+
+    const phanTuTheoId = document.getElementById("title")
+    console.log("getElementById:", phanTuTheoId)
+  </script>
+</body>
+</html>

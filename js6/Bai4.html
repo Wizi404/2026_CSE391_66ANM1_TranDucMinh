@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Bài 4</title>
+  <style>
+    .active{background-color:lightblue}
+  </style>
+</head>
+<body>
+  <h1 id="title">Tiêu đề ban đầu</h1>
+  <button id="btn">Click me</button>
+  <p id="text">Di chuột vào đây</p>
+
+  <script>
+    const btn = document.getElementById("btn")
+    const title = document.getElementById("title")
+    const text = document.getElementById("text")
+
+    btn.addEventListener("click", function () {
+      title.textContent = "Tiêu đề đã thay đổi"
+    })
+
+    btn.addEventListener("click", function () {
+      document.body.classList.toggle("active")
+    })
+
+    text.addEventListener("mouseenter", function () {
+      text.textContent = "Chuột đang vào"
+    })
+
+    text.addEventListener("mouseleave", function () {
+      text.textContent = "Chuột đã rời đi"
+    })
+  </script>
+</body>
+</html>

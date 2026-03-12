@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Bài 3</title>
+  <style>
+    .box{padding:20px;border:1px solid black;margin-top:20px}
+    .active{background-color:yellow}
+    .hidden{display:none}
+  </style>
+</head>
+<body>
+  <h1>Bài thực hành Attributes và CSS Classes</h1>
+  <img id="anh" src="https://www.w3schools.com/html/img_chania.jpg" alt="Ảnh ban đầu" width="300">
+  <script>
+    const anh = document.getElementById("anh")
+    anh.src = "https://www.w3schools.com/html/pic_trulli.jpg"
+    anh.alt = "Ảnh mới"
+    anh.width = 300
+
+    const hop = document.getElementById("hop")
+    hop.classList.add("active")
+    console.log("Sau add:", hop.className)
+
+    hop.classList.remove("box")
+    console.log("Sau remove:", hop.className)
+
+    hop.classList.toggle("hidden")
+    console.log("Sau toggle lần 1:", hop.className)
+
+    hop.classList.toggle("hidden")
+    console.log("Sau toggle lần 2:", hop.className)
+
+    console.log("Có class active không?", hop.classList.contains("active"))
+    console.log("Có class box không?", hop.classList.contains("box"))
+  </script>
+</body>
+</html>

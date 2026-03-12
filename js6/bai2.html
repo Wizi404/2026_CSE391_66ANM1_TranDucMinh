@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thao tác DOM</title>
+</head>
+<body>
+  <h1 id="title">Tiêu đề ban đầu</h1>
+
+  <div id="content"></div>
+
+  <ul id="list">
+    <li>Mục 1</li>
+    <li id="delete-item">Mục 2</li>
+    <li>Mục 3</li>
+  </ul>
+
+  <script>
+    const title = document.getElementById("title")
+    title.textContent = "Tiêu đề đã được thay đổi"
+
+    const content = document.getElementById("content")
+    content.innerHTML = "<p>Đây là đoạn văn được chèn bằng <b>innerHTML</b></p>"
+
+    const newItem = document.createElement("li")
+    newItem.textContent = "Mục mới được thêm"
+
+    const list = document.getElementById("list")
+    list.append(newItem)
+
+    const deleteItem = document.getElementById("delete-item")
+    deleteItem.remove()
+  </script>
+</body>
+</html>

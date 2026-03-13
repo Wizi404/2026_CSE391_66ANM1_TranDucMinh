@@ -47,7 +47,7 @@ footer {
     padding: 0;
     box-sizing: border-box;
 }
-                                    /* Bai2 
+                                    /* Bai2 */
 .posts {
     max-width: 1100px;
     margin: 40px auto;
@@ -62,17 +62,15 @@ footer {
     background: white;
     border-radius: 8px;
     vertical-align: top;
-} */
+} 
 
  /* ===== BÀI 3A  =====*/
-
-
 .posts {
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 40px auto;
 }
 
@@ -94,13 +92,11 @@ footer {
         max-width: 500px;
     }
 }
-
-
-
                                                              /* BÀI 3B  */
+   
 .gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
   gap: 16px;
   max-width: 1200px;
   margin: 40px auto;
@@ -115,24 +111,17 @@ footer {
   height: 150px;
   font-size: 2rem;
   border-radius: 8px;
-}
-@media (max-width: 992px) {
-  .gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 576px) {
-  .gallery {
-    grid-template-columns: 1fr;
-  }
-}
-@media (max-width: 576px) {
-  .gallery {
-    grid-template-columns: 1fr;
-  }
-}
+}         
+
+
+
+
+
+
 
 /*Bai4*/
+
+
 .sticky-header {
     position: sticky;
     top: 0;

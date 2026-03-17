@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài tập Event</title>
+  <style>
+    body{font-family:Arial,sans-serif;max-width:900px;margin:20px auto;padding:20px;background:#f5f5f5}
+    h1{text-align:center}
+    section{background:#fff;padding:15px;margin-bottom:20px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+    button{padding:10px 16px;border:none;background:#007bff;color:#fff;border-radius:6px;cursor:pointer}
+    button:hover{background:#0056b3}
+    input{padding:10px;width:250px;margin-right:10px}
+    .outer{padding:30px;background:#ffd6d6}
+    .middle{padding:30px;background:#d6ffd6}
+    .inner{padding:30px;background:#d6e4ff;text-align:center}
+    ul{padding:0;list-style:none}
+    li{padding:10px;margin:5px 0;background:#eee;border-radius:6px;cursor:pointer}
+    #log{background:#222;color:#0f0;padding:10px;min-height:100px;border-radius:8px;white-space:pre-line}
+  </style>
+</head>
+<body>
+  <h1>Bài tập JavaScript Event</h1>
+
+  <section>
+    <h2>1. Click Event Listener</h2>
+    <button id="clickBtn">Bấm vào tôi</button>
+    <p id="clickText">Chưa bấm nút</p>
+  </section>
+
+  <section>
+    <h2>2. Keyboard Event Listener</h2>
+    <input type="text" id="keyInput" placeholder="Nhấn phím bất kỳ">
+    <p id="keyText">Phím bạn nhấn sẽ hiện ở đây</p>
+  </section>
+
+  <section>
+    <h2>3. Form Submit</h2>
+    <form id="myForm">
+      <input type="text" id="nameInput" placeholder="Nhập tên của bạn" required>
+      <button type="submit">Gửi</button>
+    </form>
+    <p id="formText"></p>
+  </section>
+
+  <section>
+    <h2>4. Event Bubbling</h2>
+    <div class="outer" id="outer">
+      Outer
+      <div class="middle" id="middle">
+        Middle
+        <div class="inner" id="inner">
+          Inner
+        </div>
+      </div>
+    </div>
+    <p>Bấm vào ô Inner để xem sự kiện lan truyền.</p>
+  </section>
+
+  <section>
+    <h2>5. Event Delegation</h2>
+    <ul id="myList">
+      <li>Mục 1</li>
+      <li>Mục 2</li>
+      <li>Mục 3</li>
+      <li>Mục 4</li>
+    </ul>
+    <p id="listText">Bạn chưa chọn mục nào</p>
+  </section>
+
+  <section>
+    <h2>Kết quả</h2>
+    <div id="log"></div>
+  </section>
+
+  <script>
+    const log = document.getElementById("log");
+
+    document.getElementById("clickBtn").addEventListener("click", function () {
+      document.getElementById("clickText").textContent = "Bạn đã bấm nút";
+      log.textContent += "Đã click vào nút\n";
+    });
+
+    document.getElementById("keyInput").addEventListener("keydown", function (e) {
+      document.getElementById("keyText").textContent = "Bạn vừa nhấn phím: " + e.key;
+      log.textContent += "Nhấn phím: " + e.key + "\n";
+    });
+
+    document.getElementById("myForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("nameInput").value;
+      document.getElementById("formText").textContent = "Xin chào, " + name;
+      log.textContent += "Form submit: " + name + "\n";
+    });
+
+    document.getElementById("outer").addEventListener("click", function () {
+      log.textContent += "Outer được click\n";
+    });
+
+    document.getElementById("middle").addEventListener("click", function () {
+      log.textContent += "Middle được click\n";
+    });
+
+    document.getElementById("inner").addEventListener("click", function () {
+      log.textContent += "Inner được click\n";
+    });
+
+    document.getElementById("myList").addEventListener("click", function (e) {
+      if (e.target.tagName === "LI") {
+        document.getElementById("listText").textContent = "Bạn chọn: " + e.target.textContent;
+        log.textContent += "Chọn danh sách: " + e.target.textContent + "\n";
+      }
+    });
+  </script>
+</body>
+</html>

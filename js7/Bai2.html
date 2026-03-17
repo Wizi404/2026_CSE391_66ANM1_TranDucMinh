@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài tập Promise</title>
+  <style>
+    body{font-family:Arial,sans-serif;max-width:900px;margin:20px auto;padding:20px;background:#f5f5f5}
+    h1{text-align:center}
+    section{background:#fff;padding:15px;margin-bottom:20px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+    button{padding:10px 16px;border:none;background:#007bff;color:#fff;border-radius:6px;cursor:pointer;margin:5px}
+    button:hover{background:#0056b3}
+    #log{background:#222;color:#0f0;padding:12px;min-height:250px;border-radius:8px;white-space:pre-line}
+  </style>
+</head>
+<body>
+  <h1>Bài tập Promise trong JavaScript</h1>
+
+  <section>
+    <h2>Chạy bài tập</h2>
+    <button onclick="bai1()">1. Promise cơ bản</button>
+    <button onclick="bai2()">2. Chain Promise</button>
+    <button onclick="bai3()">3. Mô phỏng lỗi</button>
+    <button onclick="bai4()">4. Callback đổi sang Promise</button>
+  </section>
+
+  <section>
+    <h2>Kết quả</h2>
+    <div id="log"></div>
+  </section>
+
+  <script>
+    const log = document.getElementById("log");
+
+    function ghi(text){
+      log.textContent += text + "\n";
+    }
+
+    function xoaLog(){
+      log.textContent = "";
+    }
+
+    function layDuLieu(){
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const thanhCong = true;
+          if(thanhCong){
+            resolve("Lấy dữ liệu thành công");
+          }else{
+            reject("Lấy dữ liệu thất bại");
+          }
+        }, 2000);
+      });
+    }
+
+    function bai1(){
+      xoaLog();
+      ghi("Đang lấy dữ liệu...");
+      layDuLieu()
+        .then(result => {
+          ghi("Kết quả: " + result);
+        })
+        .catch(error => {
+          ghi("Lỗi: " + error);
+        });
+    }
+
+    function buoc1(){
+      return new Promise(resolve => {
+        setTimeout(() => resolve(5), 1000);
+      });
+    }
+
+    function bai2(){
+      xoaLog();
+      ghi("Bắt đầu chain promise...");
+      buoc1()
+        .then(value => {
+          ghi("Bước 1: " + value);
+          return value * 2;
+        })
+        .then(value => {
+          ghi("Bước 2: " + value);
+          return value + 10;
+        })
+        .then(value => {
+          ghi("Bước 3: " + value);
+        })
+        .catch(error => {
+          ghi("Lỗi: " + error);
+        });
+    }
+
+    function moPhongLoi(){
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject("Có lỗi xảy ra trong quá trình xử lý");
+        }, 1500);
+      });
+    }
+
+    function bai3(){
+      xoaLog();
+      ghi("Đang chạy mô phỏng lỗi...");
+      Promise.resolve("Bắt đầu")
+        .then(result => {
+          ghi(result);
+          return moPhongLoi();
+        })
+        .then(result => {
+          ghi(result);
+        })
+        .catch(error => {
+          ghi("Bắt lỗi tập trung: " + error);
+        });
+    }
+
+    function tinhTongCallback(a, b, callback){
+      setTimeout(() => {
+        callback(a + b);
+      }, 1000);
+    }
+
+    function tinhTongPromise(a, b){
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve(a + b);
+        }, 1000);
+      });
+    }
+
+    function bai4(){
+      xoaLog();
+      ghi("Dùng callback truyền thống:");
+      tinhTongCallback(3, 4, result => {
+        ghi("Kết quả callback: " + result);
+        ghi("Chuyển sang Promise:");
+        tinhTongPromise(3, 4)
+          .then(result => {
+            ghi("Kết quả Promise: " + result);
+          })
+          .catch(error => {
+            ghi("Lỗi: " + error);
+          });
+      });
+    }
+  </script>
+</body>
+</html>
